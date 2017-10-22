@@ -1,0 +1,10 @@
+Sets trackpoint sensitivity on thinkpads.
+
+Call tp-trackpoint to see how it works.
+
+To set things on startup/on configuration changes, install 
+tp-trackpoint.service and tp-trackpoint.path to systemd, enable 
+tp-trackpoint.path and copy tp-trackpoint.conf to /etc/default/tp-trackpoint.
+
+A package is also built at https://launchpad.net/~shuhao/+archive/ubuntu/fixed
+
