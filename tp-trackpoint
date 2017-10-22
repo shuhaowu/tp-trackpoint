@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+
+import argparse
+import sys
+
+PATH_DRIFT_TIME = "/sys/devices/platform/i8042/serio1/serio2/drift_time"
+PATH_SENSITIVITY = "/sys/devices/platform/i8042/serio1/serio2/sensitivity"
+PATH_SPEED = "/sys/devices/platform/i8042/serio1/serio2/speed"
+
+VERSION = "1.0"
+
+
+def main():
+  print("tp-trackpoint version {}".format(VERSION))
+  parser = argparse.ArgumentParser(description="set trackpoint parameters")
+  parser.add_argument("-d", "--drift-time", type=int, default=None, help="the amount of time you must hold the trackpoint constant for it to recalibrate to 0 in 0.1s increments")
+  parser.add_argument("-s", "--speed", type=int, default=None, help="the speed of the trackpoint")
+  parser.add_argument("-t", "--sensitivity", type=int, default=None, help="the sensitivity of the trackpoint")
+
+  if len(sys.argv) == 1:
+    parser.print_usage()
+    sys.exit(0)
+
+  args = parser.parse_args()
+
+  attrs = [
+    ("drift_time", PATH_DRIFT_TIME),
+    ("speed", PATH_SPEED),
+    ("sensitivity", PATH_SENSITIVITY),
+  ]
+
+  for attr, path in attrs:
+    value = getattr(args, attr, None)
+    if value is not None:
+      print("writing {} to {}".format(value, attr))
+      with open(path, "w") as f:
+        f.write(str(value))
+
+
+if __name__ == "__main__":
+  main()

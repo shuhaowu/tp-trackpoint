@@ -1,0 +1,10 @@
+[Unit]
+Description=Sets Thinkpad trackpoint preferences on startup
+ConditionPathExists=/sys/devices/platform/i8042/serio1/serio2/drift_time
+ConditionPathExists=/sys/devices/platform/i8042/serio1/serio2/sensitivity
+ConditionPathExists=/sys/devices/platform/i8042/serio1/serio2/speed
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/default/tp-trackpoint
+ExecStart=/usr/bin/tp-trackpoint --speed $TRACKPOINT_SPEED --sensitivity $TRACKPOINT_SENSITIVITY --drift-time $TRACKPOINT_DRIFT_TIME
