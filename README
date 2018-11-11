@@ -2,9 +2,16 @@ Sets trackpoint sensitivity on thinkpads.
 
 Call tp-trackpoint to see how it works.
 
-To set things on startup/on configuration changes, install 
-tp-trackpoint.service and tp-trackpoint.path to systemd, enable 
+To set things on startup/on configuration changes, install
+tp-trackpoint.service and tp-trackpoint.path to systemd, enable
 tp-trackpoint.path and copy tp-trackpoint.conf to /etc/default/tp-trackpoint.
 
 A package is also built at https://launchpad.net/~shuhao/+archive/ubuntu/fixed
+
+
+On some systems, it is possible the sys device path for the trackpoint is not
+at /sys/devices/platform/i8042/serio1/serio2 but at somewhere like
+/sys/devices/platform/i8042/serio4/serio5. In these case, overwrite the
+variable in the conf file and also add a systemd override for the
+ConditionPathExists
 

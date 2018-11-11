@@ -1,13 +1,20 @@
 #!/usr/bin/env python3
 
 import argparse
+import os
+import os.path
 import sys
 
-PATH_DRIFT_TIME = "/sys/devices/platform/i8042/serio1/serio2/drift_time"
-PATH_SENSITIVITY = "/sys/devices/platform/i8042/serio1/serio2/sensitivity"
-PATH_SPEED = "/sys/devices/platform/i8042/serio1/serio2/speed"
+BASE_SYS_PATH = os.environ.get(
+  "TRACKPOINT_SYS_PATH",
+  "/sys/devices/platform/i8042/serio1/serio2"
+)
 
-VERSION = "1.0"
+PATH_DRIFT_TIME = os.path.join(BASE_SYS_PATH, "drift_time")
+PATH_SENSITIVITY = os.path.join(BASE_SYS_PATH, "sensitivity")
+PATH_SPEED = os.path.join(BASE_SYS_PATH, "speed")
+
+VERSION = "1.1"
 
 
 def main():
