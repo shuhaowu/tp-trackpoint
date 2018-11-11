@@ -13,5 +13,12 @@ On some systems, it is possible the sys device path for the trackpoint is not
 at /sys/devices/platform/i8042/serio1/serio2 but at somewhere like
 /sys/devices/platform/i8042/serio4/serio5. In these case, overwrite the
 variable in the conf file and also add a systemd override for the
-ConditionPathExists
+tp-trackpoint.path (systemctl edit tp-trackpoint.path):
+
+[Path]
+PathExists=
+PathExists=/sys/devices/platform/i8042/serio4/serio5/drift_time
+PathExists=/sys/devices/platform/i8042/serio4/serio5/sensitivity
+PathExists=/sys/devices/platform/i8042/serio4/serio5/speed
+PathChanged=/etc/default/tp-trackpoint
 
