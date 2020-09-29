@@ -14,7 +14,7 @@ PATH_DRIFT_TIME = os.path.join(BASE_SYS_PATH, "drift_time")
 PATH_SENSITIVITY = os.path.join(BASE_SYS_PATH, "sensitivity")
 PATH_SPEED = os.path.join(BASE_SYS_PATH, "speed")
 
-VERSION = "1.1"
+VERSION = "1.2"
 
 
 def main():
@@ -39,7 +39,10 @@ def main():
   for attr, path in attrs:
     value = getattr(args, attr, None)
     if value is not None:
-      print("writing {} to {}".format(value, attr))
+      with open(path) as f:
+        oldval = f.read().strip()
+
+      print("writing {} to {} (old: {})".format(value, attr, oldval))
       with open(path, "w") as f:
         f.write(str(value))
 

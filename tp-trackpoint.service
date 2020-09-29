@@ -1,7 +1,12 @@
 [Unit]
 Description=Sets Thinkpad trackpoint preferences on startup
+After=suspend.target
 
 [Service]
 Type=oneshot
 EnvironmentFile=/etc/default/tp-trackpoint
+ExecStartPre=/bin/sleep $TRACKPOINT_WAIT_TIME
 ExecStart=/usr/bin/tp-trackpoint --speed $TRACKPOINT_SPEED --sensitivity $TRACKPOINT_SENSITIVITY --drift-time $TRACKPOINT_DRIFT_TIME
+
+[Install]
+WantedBy=suspend.target
